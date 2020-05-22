@@ -11,6 +11,7 @@
   height: 560px;
   border-radius: 5px;
   position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 @media screen and (max-width: 576px) {
   .osnova {
@@ -25,7 +26,7 @@
 }
 
 .ramka-display {
-  background-color: #eeccff;
+  /*background-color: #eeccff;*/
   position: absolute;
   top: 5%;
   left: 15%;
@@ -42,20 +43,172 @@
   height: 80%;
   top: 10%;
   left: 10%;
-  background-color: #79d2a6;
+  background-color: #9fae87;
   display: flex;
 }
 
-.game-display {
+.game-display-ramka {
   height: 100%;
   flex: 2;
   padding: 2%;
 }
 
+.game-display {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .stat-display {
   height: 100%;
   flex: 1;
-  background-color: #d9f2e6;
+  /*background-color: #d9f2e6;*/
+}
+
+.controls {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 32%;
+  width: 100%;
+  /*background-color: lightgrey;*/
+}
+
+.main {
+  height: 100%;
+  width: 45%;
+  /*background-color: grey;*/
+}
+
+.copche-ramka {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 55px;
+}
+.copche-ramka p {
+  font-size: 0.5em;
+}
+
+.tri {
+  height: 25%;
+  display: flex;
+  justify-content: space-around;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+.edno {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1px solid;
+  background-color: red;
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.8) inset, 0 -1px 4px rgba(0, 0, 0, 0.8) inset;
+}
+.edno:active {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) inset, 0 -1px 4px rgba(255, 255, 255, 0.8) inset;
+}
+
+.drop-ramka {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 110px;
+  margin: 10% auto;
+}
+.drop-ramka p {
+  font-size: 0.5em;
+}
+
+.drop {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  background-color: red;
+  border: 1px solid;
+  box-shadow: 0 3px 6px rgba(255, 255, 255, 0.8) inset, 0 -3px 6px rgba(0, 0, 0, 0.8) inset;
+}
+.drop:active {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.8) inset, 0 -3px 6px rgba(255, 255, 255, 0.8) inset;
+}
+
+.arrows {
+  height: 100%;
+  width: 55%;
+  position: absolute;
+  top: 0;
+  right: 3%;
+  /*background-color: darkgrey;*/
+}
+
+.arrow-ramka {
+  width: 60px;
+  height: 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: red;
+  border: 1px solid;
+  box-shadow: 0 3px 6px rgba(255, 255, 255, 0.8) inset, 0 -3px 6px rgba(0, 0, 0, 0.8) inset;
+}
+.arrow:active {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.8) inset, 0 -3px 6px rgba(255, 255, 255, 0.8) inset;
+}
+
+p {
+  font-size: 0.5em;
+}
+
+#arrow-rot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5%;
+  left: 35%;
+}
+
+#arrow-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 30%;
+  left: 5%;
+}
+
+#arrow-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 30%;
+  right: 5%;
+}
+
+#arrow-bot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  bottom: 3%;
+  left: 35%;
 }
 
 /*# sourceMappingURL=style.css.map */
