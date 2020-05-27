@@ -5,6 +5,8 @@ window.onload = function() {
 		document.querySelector(".game-display").offsetWidth - 1;
 	console.log(gameDisplayWidth);
 	const blockRyb = gameDisplayWidth / 10;
+	const cleans = document.querySelector("#cleans-result");
+	const nextTet = document.querySelector("#next-result");
 
 	for (let i = 0; i < 190; i++) {
 		var block = document.createElement("div");
@@ -12,29 +14,38 @@ window.onload = function() {
 		block.style.width = blockRyb;
 		block.style.height = blockRyb;
 		// block.style.backgroundImage = "url('square.png')";
-		block.classList.add("block");
+		block.classList.add("fon");
 	}
 	for (let i = 0; i < 10; i++) {
 		var block = document.createElement("div");
 		gameDisplay.appendChild(block);
 		block.style.width = blockRyb;
 		block.style.height = blockRyb;
-		block.style.backgroundColor = "purple";
+		
+		//block.classList.add("block3");
+		block.classList.add("fon");
+	}
+	for (let i = 0; i < 10; i++) {
+		var block = document.createElement("div");
+		gameDisplay.appendChild(block);
+		block.style.width = blockRyb;
+		block.style.height = 0;
 		block.classList.add("block3");
-		block.classList.add("block");
 	}
 
 	display.style.height = 20 * blockRyb + 10;
 
-	const squares = Array.from(gameDisplay.querySelectorAll("div"));
+	let squares = Array.from(gameDisplay.querySelectorAll("div"));
 	console.log(squares);
 
     const x =10;
     const y=20; 
     let currentPosition;
     let currentRotation = 0;
+    let currentIndex = 0;
     let timer;
     let score = 0;
+    let clean = 0;
 	const pause = document.querySelector("#pause");
 	const result = document.querySelector("#points-result");
 	const startButton = document.querySelector(".drop");
@@ -110,6 +121,7 @@ window.onload = function() {
 			squares[currentPosition + index].style.opacity = 1;
 				
 		});
+
 	}
 
 	//erase tetramino
@@ -215,6 +227,10 @@ window.onload = function() {
 			);
 
 			random = Math.floor(Math.random() * theTetrominoes.length);
+            // switch(random) {
+            // 	case 0:
+            // }
+            //nextTet.appendChild()
 			current = theTetrominoes[random][currentRotation];
 			
 			currentPosition = 4;
@@ -250,8 +266,10 @@ window.onload = function() {
 			) {
 				score += 10;
 				result.innerHTML = score;
+				clean +=1;
+				cleans.innerHTML = clean;
 				row.forEach((index) => {
-					squares[index].style.backgroundImage = "none";
+					squares[index].style.opacity = 0.1;
 					squares[index].classList.remove("block2");
 					squares[index].classList.remove("block");
 				});
@@ -260,7 +278,10 @@ window.onload = function() {
 				squares = removedSquares.concat(squares);
 				console.log("all squares ", squares);
 				//grid.innerHTML = "";
-				squares.forEach((cell) => grid.appendChild(cell));
+				squares.forEach((cell) => {
+					gameDisplay.appendChild(cell)
+					
+				});
 			}
 		}
 	}
@@ -281,5 +302,3 @@ window.onload = function() {
 
 
 };
-
-
