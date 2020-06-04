@@ -5,50 +5,49 @@ window.onload = function() {
 		document.querySelector(".game-display").offsetWidth - 1;
 	console.log(gameDisplayWidth);
 	const blockRyb = gameDisplayWidth / 10;
-	const cleans = document.querySelector("#cleans-result");
-	const nextTet = document.querySelector("#next-result");
 
-	for (let i = 0; i < 190; i++) {
-		var block = document.createElement("div");
-		gameDisplay.appendChild(block);
-		block.style.width = blockRyb;
-		block.style.height = blockRyb;
-		// block.style.backgroundImage = "url('square.png')";
-		block.classList.add("fon");
+	function createBoard() {
+		for (let i = 0; i < 200; i++) {
+			var block = document.createElement("div");
+			gameDisplay.appendChild(block);
+			block.style.width = blockRyb;
+			block.style.height = blockRyb;
+			block.classList.add("fon");
+		}
+
+		for (let i = 0; i < 10; i++) {
+			var block = document.createElement("div");
+			gameDisplay.appendChild(block);
+			block.style.width = blockRyb;
+			block.style.height = 0;
+			block.classList.add("block3");
+		}
 	}
-	for (let i = 0; i < 10; i++) {
-		var block = document.createElement("div");
-		gameDisplay.appendChild(block);
-		block.style.width = blockRyb;
-		block.style.height = blockRyb;
-		
-		//block.classList.add("block3");
-		block.classList.add("fon");
-	}
-	for (let i = 0; i < 10; i++) {
-		var block = document.createElement("div");
-		gameDisplay.appendChild(block);
-		block.style.width = blockRyb;
-		block.style.height = 0;
-		block.classList.add("block3");
-	}
+	createBoard();
 
 	display.style.height = 20 * blockRyb + 10;
 
 	let squares = Array.from(gameDisplay.querySelectorAll("div"));
 	console.log(squares);
 
-    const x =10;
-    const y=20; 
-    let currentPosition;
-    let currentRotation = 0;
-    let currentIndex = 0;
-    let timer;
-    let score = 0;
-    let clean = 0;
+	const x = 10;
+	const y = 20;
+	let currentPosition;
+	let currentRotation = 0;
+	let currentIndex = 0;
+	let timer;
+	let speed = 1000;
+	let score = 0;
+	let clean = 0;
+	let nextRandom;
+	let level = 1;
+	const levelDisp = document.querySelector("#level-result");
 	const pause = document.querySelector("#pause");
 	const result = document.querySelector("#points-result");
 	const startButton = document.querySelector(".drop");
+	const cleans = document.querySelector("#cleans-result");
+	const nextTet = document.querySelector("#next-result");
+	const reset = document.querySelector("#reset");
 
 	function control(e) {
 		console.log(e.keyCode);
@@ -56,8 +55,8 @@ window.onload = function() {
 		else if (e.keyCode === 38 || e.keyCode === 82) rotate();
 		else if (e.keyCode === 37) moveLeft();
 		else if (e.keyCode === 40) moveDown();
-		// else if (e.keyCode === 68) draw();
-		// else if (e.keyCode === 69) erase();
+		else if (e.keyCode === 32) startGame();
+		else if (e.keyCode === 80) pauseGame();
 	}
 
 	document.addEventListener("keydown", control);
@@ -119,9 +118,7 @@ window.onload = function() {
 		current.forEach((index) => {
 			squares[currentPosition + index].classList.add("block");
 			squares[currentPosition + index].style.opacity = 1;
-				
 		});
-
 	}
 
 	//erase tetramino
@@ -226,20 +223,66 @@ window.onload = function() {
 				squares[currentPosition + index].classList.add("block2")
 			);
 
-			random = Math.floor(Math.random() * theTetrominoes.length);
-            // switch(random) {
-            // 	case 0:
-            // }
-            //nextTet.appendChild()
+			random = nextRandom;
+
 			current = theTetrominoes[random][currentRotation];
-			
+			nextRandom = Math.floor(Math.random() * theTetrominoes.length);
 			currentPosition = 4;
 			draw();
 			res();
+			displayNext();
 			gameOver();
 		}
-}
-//Game Over
+	}
+
+	function displayNext() {
+		let next;
+
+		switch (nextRandom) {
+			case 0:
+				next = document.createElement("img");
+				next.setAttribute("src", "l-tetramino.png");
+				next.style.width = "30px";
+				next.style.height = "40px";
+				nextTet.innerHTML = "";
+				nextTet.appendChild(next);
+				break;
+			case 1:
+				next = document.createElement("img");
+				next.setAttribute("src", "z-tetramino.png");
+				next.style.width = "30px";
+				next.style.height = "40px";
+				nextTet.innerHTML = "";
+				nextTet.appendChild(next);
+				break;
+			case 2:
+				next = document.createElement("img");
+				next.setAttribute("src", "t-tetramino.png");
+				next.style.width = "30px";
+				next.style.height = "40px";
+				nextTet.innerHTML = "";
+				nextTet.appendChild(next);
+				break;
+			case 3:
+				next = document.createElement("img");
+				next.setAttribute("src", "o-tetramino.png");
+				next.style.width = "30px";
+				next.style.height = "30px";
+				nextTet.innerHTML = "";
+				nextTet.appendChild(next);
+				break;
+			case 4:
+				next = document.createElement("img");
+				next.setAttribute("src", "i-tetramino.png");
+				next.style.width = "15px";
+				next.style.height = "40px";
+				nextTet.innerHTML = "";
+				nextTet.appendChild(next);
+				break;
+		}
+	}
+
+	//Game Over
 	function gameOver() {
 		if (
 			current.some((index) =>
@@ -266,8 +309,77 @@ window.onload = function() {
 			) {
 				score += 10;
 				result.innerHTML = score;
-				clean +=1;
+				clean += 1;
 				cleans.innerHTML = clean;
+				switch (score) {
+					case 50:
+						level++;
+						levelDisp.innerHTML = level;
+						speed -= 100;
+						console.log("speed is", speed);
+						clearInterval(timer);
+						timer = setInterval(moveDown, speed);
+						// if(speed<100) speed = 100;
+						break;
+					case 100:
+						level++;
+						levelDisp.innerHTML = level;
+						speed -= 100;
+						console.log("speed is", speed);
+						clearInterval(timer);
+						timer = setInterval(moveDown, speed);
+						// if(speed<100) speed = 100;
+						break;
+					case 150:
+						level++;
+						levelDisp.innerHTML = level;
+						speed -= 100;
+						console.log("speed is", speed);
+						clearInterval(timer);
+						timer = setInterval(moveDown, speed);
+						// if(speed<100) speed = 100;
+						break;
+					case 200:
+						level++;
+						levelDisp.innerHTML = level;
+						speed -= 100;
+						clearInterval(timer);
+						timer = setInterval(moveDown, speed);
+						// if(speed<100) speed = 100;
+						break;
+					case 250:
+						level++;
+						levelDisp.innerHTML = level;
+						speed -= 100;
+						clearInterval(timer);
+						timer = setInterval(moveDown, speed);
+						// if(speed<100) speed = 100;
+						break;
+					case 300:
+						level++;
+						levelDisp.innerHTML = level;
+						speed -= 100;
+						clearInterval(timer);
+						timer = setInterval(moveDown, speed);
+						// if(speed<100) speed = 100;
+						break;
+					case 350:
+						level++;
+						levelDisp.innerHTML = level;
+						speed -= 100;
+						clearInterval(timer);
+						timer = setInterval(moveDown, speed);
+						// if(speed<100) speed = 100;
+						break;
+					case 400:
+						level++;
+						levelDisp.innerHTML = level;
+						speed -= 100;
+						clearInterval(timer);
+						timer = setInterval(moveDown, speed);
+						// if(speed<100) speed = 100;
+						break;
+				}
 				row.forEach((index) => {
 					squares[index].style.opacity = 0.1;
 					squares[index].classList.remove("block2");
@@ -279,26 +391,45 @@ window.onload = function() {
 				console.log("all squares ", squares);
 				//grid.innerHTML = "";
 				squares.forEach((cell) => {
-					gameDisplay.appendChild(cell)
-					
+					gameDisplay.appendChild(cell);
 				});
 			}
 		}
 	}
-	pause.addEventListener("click", () => {
+
+	function pauseGame() {
 		if (timer) {
 			clearInterval(timer);
 			timer = null;
 		} else {
-			timer = setInterval(moveDown, 1000);
+			timer = setInterval(moveDown, speed);
 		}
-	});
-	startButton.addEventListener("click",() => timer = setInterval(moveDown, 1000))
+	}
+	pause.addEventListener("click", pauseGame);
 
+	function startGame() {
+		timer = setInterval(moveDown, speed);
+		nextRandom = Math.floor(Math.random() * theTetrominoes.length);
+		displayNext();
+	}
+	startButton.addEventListener("click", startGame);
 
+	function resetting() {
+		clearInterval(timer);
+		score = 0;
+		result.innerHTML = score;
+		clean = 0;
+		cleans.innerHTML = clean;
+		level = 1;
+		levelDisp.innerHTML = level;
+		speed = 1000;
+		nextTet.innerHTML = "";
+		squares.forEach((sq) => {
+			sq.classList.remove("block");
+			sq.classList.remove("block2");
+			sq.style.opacity = 0.1;
+		});
+	}
 
-
-
-
-
+	reset.addEventListener("click", resetting);
 };
