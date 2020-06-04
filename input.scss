@@ -16,63 +16,61 @@
 		height: 100vh;
 	}
 }
-#i-tetramino-l{
+#i-tetramino-l {
 	position: absolute;
 	top: 15%;
 	left: 5%;
 }
-#z-tetramino-l{
+#z-tetramino-l {
 	position: absolute;
 	top: 30%;
 	left: 5%;
 }
-#t-tetramino-l{
+#t-tetramino-l {
 	position: absolute;
 	top: 40%;
 	left: 5%;
 }
-#l-tetramino-l{
+#l-tetramino-l {
 	position: absolute;
 	top: 50%;
 	left: 5%;
 }
-#i-tetramino-r{
+#i-tetramino-r {
 	position: absolute;
 	top: 15%;
-	right: 5%;
+	right: 3%;
 }
-#z-tetramino-r{
+#z-tetramino-r {
 	position: absolute;
 	top: 30%;
 	right: 5%;
 }
-#t-tetramino-r{
+#t-tetramino-r {
 	position: absolute;
 	top: 40%;
-	right: 5%;
-	
-		transform:rotateY(180deg);
-	
+	right: 3%;
+
+	transform: rotateY(180deg);
 }
-#l-tetramino-r{
+#l-tetramino-r {
 	position: absolute;
 	top: 50%;
-	right: 5%;
-	
-		transform:rotateY(180deg);
-	
+	right: 3%;
+
+	transform: rotateY(180deg);
 }
-#t-tetramino-t{
+#t-tetramino-t {
 	position: absolute;
 	top: 3%;
 	left: 19%;
-	transform:rotate(270deg);
+	transform: rotate(270deg);
 }
-#l-tetramino-t{
+#l-tetramino-t {
 	position: absolute;
 	top: 3%;
 	right: 19%;
-	transform:rotate(270deg);
+	transform: rotate(270deg);
 }
 .tetris {
 	margin-top: 4%;
@@ -80,7 +78,7 @@
 	font-size: 1.5em;
 }
 .fon {
-	background: url(square.png) ;
+	background: url(square.png);
 	background-size: cover;
 	opacity: 0.1;
 }
@@ -91,9 +89,9 @@
 	left: 15%;
 	width: 70%;
 	height: 60%;
-	border-left: 4px solid ;
-	border-right: 4px solid ;
-	border-bottom: 4px solid ;
+	border-left: 4px solid;
+	border-right: 4px solid;
+	border-bottom: 4px solid;
 }
 .display {
 	position: absolute;
@@ -103,7 +101,8 @@
 	left: 10%;
 	background-color: #9fae87;
 	display: flex;
-	box-shadow: 2px 2px 1px 2px rgba(0,0,0,.4) inset,-2px -2px 1px 2px rgba(255,255,255,.4) inset;
+	box-shadow: 2px 2px 1px 2px rgba(0, 0, 0, 0.4) inset,
+		-2px -2px 1px 2px rgba(255, 255, 255, 0.4) inset;
 }
 .game-display-ramka {
 	height: 100%;
@@ -121,7 +120,7 @@
 	flex-direction: column;
 	justify-content: space-around;
 	padding-left: 3%;
-	font-size: .8em;
+	font-size: 0.8em;
 }
 .statistics {
 	display: flex;
@@ -129,9 +128,11 @@
 	justify-content: center;
 	align-items: center;
 }
-#points-result,#cleans-result,#level-result {
-  align-self: flex-end;
-  margin-right: 20%;
+#points-result,
+#cleans-result,
+#level-result {
+	align-self: flex-end;
+	margin-right: 20%;
 }
 .controls {
 	position: absolute;
