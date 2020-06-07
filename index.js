@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
 	const display = document.querySelector(".display");
 	const gameDisplay = document.querySelector(".game-display");
 	const gameDisplayWidth =
@@ -48,6 +48,45 @@ window.onload = function() {
 	const cleans = document.querySelector("#cleans-result");
 	const nextTet = document.querySelector("#next-result");
 	const reset = document.querySelector("#reset");
+	const god = document.querySelector("#godz");
+	const godzila = god.querySelector("img");
+	console.log(godzila);
+
+	//Welcome animation
+	function welcome() {
+		setTimeout(function () {
+			// do something
+			godzila.setAttribute("src", "godz2.png");
+			setTimeout(function () {
+				// do second thing
+				godzila.setAttribute("src", "godz3.png");
+				setTimeout(function () {
+					// do something
+					godzila.setAttribute("src", "godz2.png");
+					setTimeout(function () {
+						// do second thing
+						godzila.setAttribute("src", "godz3.png");
+						setTimeout(function () {
+							// do second thing
+							godzila.setAttribute("src", "godz3.png");
+							god.style.transform = "rotateY(180deg)";
+							setTimeout(function () {
+								// do second thing
+								godzila.setAttribute("src", "godz2.png");
+								god.style.transform = "rotateY(180deg)";
+								setTimeout(function () {
+									// do second thing
+									godzila.setAttribute("src", "godz2.png");
+									god.style.transform = "rotateY(180deg)";
+								}, 500);
+							}, 500);
+						}, 500);
+					}, 500);
+				}, 500);
+			}, 500);
+		}, 500);
+	}
+	welcome();
 
 	function control(e) {
 		console.log(e.keyCode);
@@ -408,6 +447,7 @@ window.onload = function() {
 	pause.addEventListener("click", pauseGame);
 
 	function startGame() {
+		god.style.display = "none";
 		timer = setInterval(moveDown, speed);
 		nextRandom = Math.floor(Math.random() * theTetrominoes.length);
 		displayNext();
