@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
 	const display = document.querySelector(".display");
 	const gameDisplay = document.querySelector(".game-display");
 	const gameDisplayWidth =
@@ -54,27 +54,27 @@ window.onload = function () {
 
 	//Welcome animation
 	function welcome() {
-		setTimeout(function () {
+		setTimeout(function() {
 			// do something
 			godzila.setAttribute("src", "godz2.png");
-			setTimeout(function () {
+			setTimeout(function() {
 				// do second thing
 				godzila.setAttribute("src", "godz3.png");
-				setTimeout(function () {
+				setTimeout(function() {
 					// do something
 					godzila.setAttribute("src", "godz2.png");
-					setTimeout(function () {
+					setTimeout(function() {
 						// do second thing
 						godzila.setAttribute("src", "godz3.png");
-						setTimeout(function () {
+						setTimeout(function() {
 							// do second thing
 							godzila.setAttribute("src", "godz3.png");
 							god.style.transform = "rotateY(180deg)";
-							setTimeout(function () {
+							setTimeout(function() {
 								// do second thing
 								godzila.setAttribute("src", "godz2.png");
 								god.style.transform = "rotateY(180deg)";
-								setTimeout(function () {
+								setTimeout(function() {
 									// do second thing
 									godzila.setAttribute("src", "godz2.png");
 									god.style.transform = "rotateY(180deg)";
