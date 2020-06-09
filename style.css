@@ -333,4 +333,9 @@ p {
   align-items: center;
 }
 
+#sound-display,
+#pause-display {
+  visibility: hidden;
+}
+
 /*# sourceMappingURL=style.css.map */
