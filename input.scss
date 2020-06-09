@@ -306,3 +306,7 @@ p {
 	justify-content: space-around;
 	align-items: center;
 }
+#sound-display,
+#pause-display {
+	visibility: hidden;
+}
