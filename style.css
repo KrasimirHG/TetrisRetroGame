@@ -327,4 +327,10 @@ p {
   left: 35%;
 }
 
+#others {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 /*# sourceMappingURL=style.css.map */
