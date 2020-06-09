@@ -50,6 +50,10 @@ window.onload = function() {
 	const reset = document.querySelector("#reset");
 	const god = document.querySelector("#godz");
 	const godzila = god.querySelector("img");
+	const pauseDisp = document.querySelector("#pause-display");
+	const sound = document.querySelector("#sound");
+	const soundDisp = document.querySelector("#sound-display");
+	const isSound = true;
 	console.log(godzila);
 
 	//Welcome animation
@@ -440,11 +444,17 @@ window.onload = function() {
 		if (timer) {
 			clearInterval(timer);
 			timer = null;
+			pauseDisp.style.visibility = "visible";
 		} else {
 			timer = setInterval(moveDown, speed);
 		}
 	}
 	pause.addEventListener("click", pauseGame);
+
+	function disableSound() {
+		soundDisp.style.visibility = "visible";
+	}
+	sound.addEventListener("click", disableSound);
 
 	function startGame() {
 		god.style.display = "none";
@@ -472,4 +482,19 @@ window.onload = function() {
 	}
 
 	reset.addEventListener("click", resetting);
+
+	function sound(src) {
+		this.sound = document.createElement("audio");
+		this.sound.src = src;
+		this.sound.setAttribute("preload", "auto");
+		this.sound.setAttribute("controls", "none");
+		this.sound.style.display = "none";
+		document.body.appendChild(this.sound);
+		this.play = function() {
+			this.sound.play();
+		};
+		this.stop = function() {
+			this.sound.pause();
+		};
+	}
 };
