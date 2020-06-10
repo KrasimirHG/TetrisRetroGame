@@ -117,6 +117,10 @@ window.onload = function() {
 	}
 
 	document.addEventListener("keydown", control);
+	document.querySelector("#arrow-rot").addEventListener("click", rotate);
+	document.querySelector("#arrow-left").addEventListener("click", moveLeft);
+	document.querySelector("#arrow-right").addEventListener("click", moveRight);
+	document.querySelector("#arrow-bot").addEventListener("click", moveDown);
 
 	//The Tetrominoes
 	const lTetromino = [
