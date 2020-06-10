@@ -45,7 +45,7 @@
 #z-tetramino-r {
 	position: absolute;
 	top: 30%;
-	right: 5%;
+	right: 3%;
 }
 #t-tetramino-r {
 	position: absolute;
@@ -182,6 +182,9 @@
 button::-moz-focus-inner {
 	border: 0;
 }
+button:focus {
+	outline: none;
+}
 
 .edno {
 	height: 30px;
@@ -306,7 +309,9 @@ p {
 	justify-content: space-around;
 	align-items: center;
 }
-#sound-display,
+/*#sound-display{
+
+}*/
 #pause-display {
 	visibility: hidden;
 }
