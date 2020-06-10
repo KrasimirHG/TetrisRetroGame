@@ -3,7 +3,7 @@ window.onload = function() {
 	const gameDisplay = document.querySelector(".game-display");
 	const gameDisplayWidth =
 		document.querySelector(".game-display").offsetWidth - 1;
-	console.log(gameDisplayWidth);
+
 	const blockRyb = gameDisplayWidth / 10;
 
 	function createBoard() {
@@ -28,7 +28,6 @@ window.onload = function() {
 	display.style.height = 20 * blockRyb + 10;
 
 	let squares = Array.from(gameDisplay.querySelectorAll("div"));
-	console.log(squares);
 
 	const x = 10;
 	const y = 20;
@@ -53,9 +52,20 @@ window.onload = function() {
 	const pauseDisp = document.querySelector("#pause-display");
 	const sound = document.querySelector("#sound");
 	const soundDisp = document.querySelector("#sound-display");
-	const isSound = true;
-	console.log(godzila);
+	var isSound = false;
+	var isPaused = false;
+	var gameSound;
+	var clear;
+	var clearLine;
+	var upLevel;
 
+	function soundInit() {
+		gameSound = new playSound("./sounds/gameover.wav");
+		clear = new playSound("./sounds/clear.wav");
+		clearLine = new playSound("./sounds/line.wav");
+		upLevel = new playSound("./sounds/success.wav");
+	}
+	soundInit();
 	//Welcome animation
 	function welcome() {
 		setTimeout(function() {
@@ -89,6 +99,10 @@ window.onload = function() {
 				}, 500);
 			}, 500);
 		}, 500);
+	}
+	console.log(isSound);
+	if (isSound) {
+		gameSound.play();
 	}
 	welcome();
 
@@ -150,10 +164,10 @@ window.onload = function() {
 
 	//Select random tetramino
 	let random = Math.floor(Math.random() * theTetrominoes.length);
-	console.log("random is ", random);
+
 	//Select current rotation
 	let current = theTetrominoes[random][currentRotation];
-	console.log("current is ", current);
+
 	currentPosition = 4;
 
 	//draw the tetramino
@@ -239,13 +253,13 @@ window.onload = function() {
 			currentRotation = 0;
 		}
 		current = theTetrominoes[random][currentRotation];
-		console.log(current);
+
 		draw();
 	}
 	function moveDown() {
 		erase();
 		currentPosition += x;
-		console.log("currentPosition is", currentPosition);
+
 		draw();
 		freeze();
 	}
@@ -261,10 +275,12 @@ window.onload = function() {
 					)
 			)
 		) {
-			console.log("freeze");
 			current.forEach((index) =>
 				squares[currentPosition + index].classList.add("block2")
 			);
+			if (isSound) {
+				clear.play();
+			}
 
 			random = nextRandom;
 
@@ -333,6 +349,9 @@ window.onload = function() {
 			)
 		) {
 			result.innerHTML = "Game Over";
+			if (isSound) {
+				gameSound.play();
+			}
 			clearInterval(timer);
 		}
 	}
@@ -344,83 +363,110 @@ window.onload = function() {
 			}
 			const row = red;
 			red = [];
-			console.log(row);
+
 			if (
 				row.every((index) =>
 					squares[index].classList.contains("block2")
 				)
 			) {
+				if (isSound) {
+					clearLine.play();
+				}
 				score += 10;
 				result.innerHTML = score;
 				clean += 1;
 				cleans.innerHTML = clean;
 				switch (score) {
 					case 50:
+						if (isSound) {
+							upLevel.play();
+						}
 						level++;
 						levelDisp.innerHTML = level;
 						speed -= 100;
-						console.log("speed is", speed);
+
 						clearInterval(timer);
 						timer = setInterval(moveDown, speed);
-						// if(speed<100) speed = 100;
+
 						break;
 					case 100:
+						if (isSound) {
+							upLevel.play();
+						}
 						level++;
 						levelDisp.innerHTML = level;
 						speed -= 100;
-						console.log("speed is", speed);
+
 						clearInterval(timer);
 						timer = setInterval(moveDown, speed);
-						// if(speed<100) speed = 100;
+
 						break;
 					case 150:
+						if (isSound) {
+							upLevel.play();
+						}
 						level++;
 						levelDisp.innerHTML = level;
 						speed -= 100;
-						console.log("speed is", speed);
+
 						clearInterval(timer);
 						timer = setInterval(moveDown, speed);
-						// if(speed<100) speed = 100;
+
 						break;
 					case 200:
+						if (isSound) {
+							upLevel.play();
+						}
 						level++;
 						levelDisp.innerHTML = level;
 						speed -= 100;
 						clearInterval(timer);
 						timer = setInterval(moveDown, speed);
-						// if(speed<100) speed = 100;
+
 						break;
 					case 250:
+						if (isSound) {
+							upLevel.play();
+						}
 						level++;
 						levelDisp.innerHTML = level;
 						speed -= 100;
 						clearInterval(timer);
 						timer = setInterval(moveDown, speed);
-						// if(speed<100) speed = 100;
+
 						break;
 					case 300:
+						if (isSound) {
+							upLevel.play();
+						}
 						level++;
 						levelDisp.innerHTML = level;
 						speed -= 100;
 						clearInterval(timer);
 						timer = setInterval(moveDown, speed);
-						// if(speed<100) speed = 100;
+
 						break;
 					case 350:
+						if (isSound) {
+							upLevel.play();
+						}
 						level++;
 						levelDisp.innerHTML = level;
 						speed -= 100;
 						clearInterval(timer);
 						timer = setInterval(moveDown, speed);
-						// if(speed<100) speed = 100;
+
 						break;
 					case 400:
+						if (isSound) {
+							upLevel.play();
+						}
 						level++;
 						levelDisp.innerHTML = level;
 						speed -= 100;
 						clearInterval(timer);
 						timer = setInterval(moveDown, speed);
-						// if(speed<100) speed = 100;
+
 						break;
 				}
 				row.forEach((index) => {
@@ -429,10 +475,9 @@ window.onload = function() {
 					squares[index].classList.remove("block");
 				});
 				const removedSquares = squares.splice(currentIndex, x);
-				console.log("removedSquares ", removedSquares);
+
 				squares = removedSquares.concat(squares);
-				console.log("all squares ", squares);
-				//grid.innerHTML = "";
+
 				squares.forEach((cell) => {
 					gameDisplay.appendChild(cell);
 				});
@@ -442,17 +487,32 @@ window.onload = function() {
 
 	function pauseGame() {
 		if (timer) {
+			pauseDisp.style.visibility = "visible";
 			clearInterval(timer);
 			timer = null;
-			pauseDisp.style.visibility = "visible";
 		} else {
+			pauseDisp.style.visibility = "hidden";
 			timer = setInterval(moveDown, speed);
 		}
 	}
 	pause.addEventListener("click", pauseGame);
 
 	function disableSound() {
-		soundDisp.style.visibility = "visible";
+		if (isSound) {
+			isSound = false;
+			gameSound.muted = true;
+			clear.muted = true;
+			clearLine.muted = true;
+			upLevel.muted = true;
+			soundDisp.style.visibility = "visible";
+		} else {
+			isSound = true;
+			gameSound.muted = false;
+			clear.muted = false;
+			clearLine.muted = false;
+			upLevel.muted = false;
+			soundDisp.style.visibility = "hidden";
+		}
 	}
 	sound.addEventListener("click", disableSound);
 
@@ -483,18 +543,19 @@ window.onload = function() {
 
 	reset.addEventListener("click", resetting);
 
-	function sound(src) {
-		this.sound = document.createElement("audio");
-		this.sound.src = src;
-		this.sound.setAttribute("preload", "auto");
-		this.sound.setAttribute("controls", "none");
-		this.sound.style.display = "none";
-		document.body.appendChild(this.sound);
+	function playSound(src) {
+		this.playSound = document.createElement("audio");
+		this.playSound.src = src;
+		this.playSound.setAttribute("preload", "auto");
+		this.playSound.setAttribute("controls", "none");
+		this.playSound.style.display = "none";
+		document.body.appendChild(this.playSound);
 		this.play = function() {
-			this.sound.play();
+			this.playSound.play();
+			console.log("PLAY");
 		};
 		this.stop = function() {
-			this.sound.pause();
+			this.playSound.pause();
 		};
 	}
 };
